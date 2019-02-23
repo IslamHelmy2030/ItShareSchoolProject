@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace School.Domain.Dto.Parameters
 {
-    public class GenderParameter : GenderNameParameter
+    public class GenderParameter
     {
-        [Required(ErrorMessage = "Gender Id Is Required")]
-        public int GenderId { get; set; }
+        [Required(AllowEmptyStrings = false,ErrorMessage = "Gender Type is Required")]
+        [StringLength(10,MinimumLength = 4,ErrorMessage = "Invalid Gender Type Length")]
+        public string GenderType { get; set; }
     }
 }

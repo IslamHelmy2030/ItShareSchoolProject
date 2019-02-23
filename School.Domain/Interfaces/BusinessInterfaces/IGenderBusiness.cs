@@ -9,8 +9,8 @@ namespace School.Domain.Interfaces.BusinessInterfaces
     {
         Task<IList<GenderDto>> GetAllGenders();
         Task<GenderDto> GetGender(int id);
-        Task<bool> AddGender(GenderNameParameter genderName);
-        Task<bool> UpdateGender(GenderParameter genderParameter);
+        Task<bool> AddGender(GenderParameter genderName);
+        Task<bool> UpdateGender(GenderDto genderParameter);
         Task<bool> DeleteGender(int id);
     }
 }
