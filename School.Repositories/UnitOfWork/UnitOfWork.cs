@@ -9,7 +9,6 @@ namespace School.Repositories.UnitOfWork
     public class UnitOfWork<T> : IUnitOfWork<T> where T : class
     {
         private DbContext _context;
-        private IDbContextTransaction _transaction;
 
         public IRepository<T> Repo { get; }
 

@@ -4,7 +4,7 @@ using School.Repositories.Repository;
 
 namespace School.Repositories.UnitOfWork
 {
-    public interface IUnitOfWork<T> : IDisposable where T : class
+    public interface IUnitOfWork<T> where T : class
     {
         IRepository<T> Repo { get; }
         Task<int> SaveChanges();
