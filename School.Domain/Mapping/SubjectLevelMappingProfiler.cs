@@ -19,11 +19,7 @@ namespace School.Domain.Mapping
                 .ForMember(dest => dest.LevelName, opt => opt.MapFrom(src => src.Level.Name))
                 .ReverseMap();
 
-
-
-            CreateMap<SubjectLevelParameter, SubjectLevel>()
-                .ForMember(dest => dest.SubjectId, opt => opt.MapFrom(src => src.SubjectId))
-                .ForMember(dest => dest.LevelId, opt => opt.MapFrom(src => src.LevelId));
+            CreateMap<SubjectLevelParameter, SubjectLevel>();             
         }
     }
 }
