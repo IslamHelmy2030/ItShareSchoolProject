@@ -10,6 +10,9 @@ namespace School.Domain.Mapping
             GenderMapping();
             StudentMapping();
             TeacherClassRoomMapping();
+            TeacherMapping();
+            SubjectMapping();
+            SubjectLevelMapping();
 
         }
 
