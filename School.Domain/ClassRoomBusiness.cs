@@ -18,10 +18,10 @@ namespace School.Domain
         }
 
 
-        public async Task<IList<IClassRoomDto>> GetAllClassRooms()
+        public async Task<IEnumerable<IClassRoomDto>> GetAllClassRooms()
         {
             var classRooms = await UnitOfWork.Repo.GetAll(x => x.Level);
-            var classRoomDtos = Mapper.Map<IList<ClassRoom>, IList<IClassRoomDto>>(classRooms);
+            var classRoomDtos = Mapper.Map<IEnumerable<ClassRoom>, IEnumerable<IClassRoomDto>>(classRooms);
             return classRoomDtos;
         }
 

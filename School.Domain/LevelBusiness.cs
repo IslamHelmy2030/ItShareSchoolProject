@@ -17,10 +17,10 @@ namespace School.Domain
         {
         }
 
-        public async Task<IList<ILevelDto>> GetAllLevels()
+        public async Task<IEnumerable<ILevelDto>> GetAllLevels()
         {
             var levels = await UnitOfWork.Repo.GetAll();
-            var levelDtos = Mapper.Map<IList<Level>, IList<ILevelDto>>(levels);
+            var levelDtos = Mapper.Map<IEnumerable<Level>, IEnumerable<ILevelDto>>(levels);
             return levelDtos;
         }
 
@@ -77,9 +77,9 @@ namespace School.Domain
         //    };
         //}
 
-        //private IList<ILevelDto> GetLevelDtos(IList<Level> levels)
+        //private IEnumerable<ILevelDto> GetLevelDtos(IEnumerable<Level> levels)
         //{
-        //    IList<ILevelDto> levelDtos = new List<ILevelDto>();
+        //    IEnumerable<ILevelDto> levelDtos = new List<ILevelDto>();
         //    foreach (var level in levels)
         //    {
         //        ILevelDto levelDto = GetLevelDto(level);

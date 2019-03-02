@@ -12,10 +12,10 @@ namespace School.Repositories.Repository
         Task<T> Get(params object[] keys);
         Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate);
         Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
-        Task<IList<T>> GetAll();
-        Task<IList<T>> GetAll(params Expression<Func<T, object>>[] includes);
-        Task<IList<T>> Find(Expression<Func<T, bool>> predicate);
-        Task<IList<T>> Find(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
+        Task<IEnumerable<T>> GetAll();
+        Task<IEnumerable<T>> GetAll(params Expression<Func<T, object>>[] includes);
+        Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
         Task<bool> Contains(Expression<Func<T, bool>> predicate);
         T Add(T newEntity);
         void Update(T entity);

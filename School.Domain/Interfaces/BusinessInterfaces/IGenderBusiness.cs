@@ -8,7 +8,7 @@ namespace School.Domain.Interfaces.BusinessInterfaces
 {
     public interface IGenderBusiness
     {
-        Task<IList<IGenderDto>> GetAllGenders();
+        Task<IEnumerable<IGenderDto>> GetAllGenders();
         Task<IGenderDto> GetGender(int id);
         Task<bool> AddGender(GenderParameter genderName);
         Task<bool> UpdateGender(GenderDto genderParameter);

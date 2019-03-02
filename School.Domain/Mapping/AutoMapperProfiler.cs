@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using School.DataLayer.Entities;
-using School.Domain.Interfaces.DtoInterfaces;
+﻿using AutoMapper;
 
 namespace School.Domain.Mapping
 {
@@ -15,12 +8,12 @@ namespace School.Domain.Mapping
         {
             LevelMapping();
             GenderMapping();
-
+            StudentMapping();
 
         }
 
-        
 
-        
+
+
     }
 }

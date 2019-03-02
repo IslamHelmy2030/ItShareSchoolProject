@@ -8,7 +8,7 @@ namespace School.Domain.Interfaces.BusinessInterfaces
 {
     public interface IClassRoomBusiness
     {
-        Task<IList<IClassRoomDto>> GetAllClassRooms();
+        Task<IEnumerable<IClassRoomDto>> GetAllClassRooms();
         Task<IClassRoomDto> GetClassRoom(int id);
         Task<bool> AddClassRoom(ClassRoomParameter classRoomParameter);
         Task<bool> UpdateClassRoom(ClassRoomDto classRoomDto);

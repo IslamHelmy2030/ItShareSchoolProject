@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using School.DataLayer.Entities;
+using School.Domain.Dto;
 using School.Domain.Dto.Parameters;
 using School.Domain.Interfaces.DtoInterfaces;
 
@@ -13,7 +14,7 @@ namespace School.Domain.Mapping
     {
         private void ClassRoomMapping()
         {
-            CreateMap<IClassRoomDto, ClassRoom>()
+            CreateMap<ClassRoomDto, ClassRoom>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ClassRoomId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ClassRoomName))
                 .ForMember(dest => dest.Level.Name, opt => opt.MapFrom(src => src.LevelName))

@@ -11,7 +11,7 @@ namespace School.Domain.Interfaces.BusinessInterfaces
 {
     public interface ILevelBusiness
     {
-        Task<IList<ILevelDto>> GetAllLevels();
+        Task<IEnumerable<ILevelDto>> GetAllLevels();
         Task<ILevelDto> GetLevel(int id);
         Task<bool> AddLevel(LevelParameter levelName);
         Task<bool> UpdateLevel(LevelDto levelParameter);

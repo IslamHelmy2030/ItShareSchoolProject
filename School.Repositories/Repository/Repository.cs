@@ -30,12 +30,12 @@ namespace School.Repositories.Repository
             return await DbSet.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IList<T>> Find(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
         {
             return await DbSet.Where(predicate).ToListAsync();
         }
 
-        public async Task<IList<T>> Find(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             var query = DbSet.OfType<T>();
             query = includes.Aggregate(query, (current, property) => current.Include(property));
@@ -48,12 +48,12 @@ namespace School.Repositories.Repository
             return result.FirstOrDefault();
         }
 
-        public async Task<IList<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return await DbSet.ToListAsync();
         }
 
-        public async Task<IList<T>> GetAll(params Expression<Func<T, object>>[] includes)
+        public async Task<IEnumerable<T>> GetAll(params Expression<Func<T, object>>[] includes)
         {
             return await Find(x => TrueExpression, includes);
         }

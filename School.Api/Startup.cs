@@ -44,6 +44,9 @@ namespace School.Api
             services.AddTransient<IUnitOfWork<Gender>, UnitOfWork<Gender>>();
             services.AddTransient<IRepository<Gender>, Repository<Gender>>();
 
+            services.AddTransient<ILevelBusiness, LevelBusiness>();
+            services.AddTransient<IUnitOfWork<Level>, UnitOfWork<Level>>();
+            services.AddTransient<IRepository<Level>, Repository<Level>>();
 
 
 

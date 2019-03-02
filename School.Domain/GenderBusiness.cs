@@ -17,10 +17,10 @@ namespace School.Domain
         {
         }
 
-        public async Task<IList<IGenderDto>> GetAllGenders()
+        public async Task<IEnumerable<IGenderDto>> GetAllGenders()
         {
             var genders = await UnitOfWork.Repo.GetAll();
-            var genderDtos = Mapper.Map<IList<Gender>, IList<IGenderDto>>(genders);
+            var genderDtos = Mapper.Map<IEnumerable<Gender>, IEnumerable<IGenderDto>>(genders);
             return genderDtos;
         }
 
