@@ -11,6 +11,7 @@ namespace School.Domain.Mapping
             StudentMapping();
             TeacherMapping();
             SubjectMapping();
+            SubjectLevelMapping();
 
         }
 
