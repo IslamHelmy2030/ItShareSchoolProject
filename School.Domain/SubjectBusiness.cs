@@ -13,7 +13,7 @@ using School.Repositories.UnitOfWork;
 
 namespace School.Domain
 {
-    class SubjectBusiness : BaseBusiness<Subject>, ISubjectBusiness
+    public class SubjectBusiness : BaseBusiness<Subject>, ISubjectBusiness
     {
 
         public SubjectBusiness(IUnitOfWork<Subject> unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
