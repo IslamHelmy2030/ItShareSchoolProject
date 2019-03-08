@@ -51,7 +51,7 @@ namespace School.Api.Controllers
                 var isAdded = await _genderBusiness.AddGender(gender);
                 if (isAdded)
                 {
-                    return Ok("Seved Successfully");
+                    return Ok("Saved Successfully");
                 }
             }
             return BadRequest(ModelState);

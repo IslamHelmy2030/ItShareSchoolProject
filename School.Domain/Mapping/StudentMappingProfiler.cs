@@ -14,8 +14,8 @@ namespace School.Domain.Mapping
                 .ForMember(dest => dest.StudentAddress, opt => opt.MapFrom(src => src.Address))
                 .ForMember(dest => dest.StudentBirthDate, opt => opt.MapFrom(src => src.BirthDate))
                 .ForMember(dest => dest.StudentPhone, opt => opt.MapFrom(src => src.Phone))
-                .ForMember(dest => dest.GenderName, opt => opt.MapFrom(src => src.Gender.Name))
-                .ForMember(dest => dest.ClassName, opt => opt.MapFrom(src => src.ClassRoom.Name))
+                //.ForMember(dest => dest.GenderName, opt => opt.MapFrom(src => src.Gender.Name))
+                //.ForMember(dest => dest.ClassName, opt => opt.MapFrom(src => src.ClassRoom.Name))
                 .ReverseMap();
 
 
