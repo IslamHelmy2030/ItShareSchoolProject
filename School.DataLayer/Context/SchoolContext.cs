@@ -17,5 +17,12 @@ namespace School.DataLayer.Context
         public virtual DbSet<SubjectLevel> SubjectLevels { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherClassRoom> TeacherClassRooms { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            
+        }
     }
 }

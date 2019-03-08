@@ -48,6 +48,9 @@ namespace School.Api
             services.AddTransient<IUnitOfWork<Level>, UnitOfWork<Level>>();
             services.AddTransient<IRepository<Level>, Repository<Level>>();
 
+            services.AddTransient<ISubjectBusiness, SubjectBusiness>();
+            services.AddTransient<IUnitOfWork<Subject>, UnitOfWork<Subject>>();
+            services.AddTransient<IRepository<Subject>, Repository<Subject>>();
 
 
 
