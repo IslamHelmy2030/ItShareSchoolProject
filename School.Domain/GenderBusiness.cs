@@ -20,14 +20,14 @@ namespace School.Domain
         public async Task<IEnumerable<IGenderDto>> GetAllGenders()
         {
             var genders = await UnitOfWork.Repo.GetAll();
-            var genderDtos = Mapper.Map<IEnumerable<Gender>, IEnumerable<IGenderDto>>(genders);
+            var genderDtos = Mapper.Map<IEnumerable<Gender>, IEnumerable<GenderDto>>(genders);
             return genderDtos;
         }
 
         public async Task<IGenderDto> GetGender(int id)
         {
             var gender = await UnitOfWork.Repo.FirstOrDefault(x => x.Id == id);
-            var genderDto = Mapper.Map<Gender, IGenderDto>(gender);
+            var genderDto = Mapper.Map<Gender, GenderDto>(gender);
             return genderDto;
         }
 
@@ -40,7 +40,7 @@ namespace School.Domain
 
         public async Task<bool> UpdateGender(GenderDto genderDto)
         {
-            var gender = Mapper.Map<IGenderDto, Gender>(genderDto);
+            var gender = Mapper.Map<GenderDto, Gender>(genderDto);
             UnitOfWork.Repo.Update(gender);
             return await UnitOfWork.SaveChanges() > 0;
         }

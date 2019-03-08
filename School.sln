@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.DataLayer", "School.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Api", "School.Api\School.Api.csproj", "{C9F115A7-A041-4880-8908-9367936DB8F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Domain", "School.Domain\School.Domain.csproj", "{73E2BC38-082A-4946-AE29-346D1749DFF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Domain", "School.Domain\School.Domain.csproj", "{73E2BC38-082A-4946-AE29-346D1749DFF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Repositories", "School.Repositories\School.Repositories.csproj", "{539849CF-211C-426F-A2AF-5A6B4C1ADA5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Repositories", "School.Repositories\School.Repositories.csproj", "{539849CF-211C-426F-A2AF-5A6B4C1ADA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Portal", "School.Portal\School.Portal.csproj", "{2F6EE72A-FB69-40AB-8333-600A528BBF8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{539849CF-211C-426F-A2AF-5A6B4C1ADA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{539849CF-211C-426F-A2AF-5A6B4C1ADA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{539849CF-211C-426F-A2AF-5A6B4C1ADA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F6EE72A-FB69-40AB-8333-600A528BBF8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F6EE72A-FB69-40AB-8333-600A528BBF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F6EE72A-FB69-40AB-8333-600A528BBF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F6EE72A-FB69-40AB-8333-600A528BBF8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
