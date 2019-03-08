@@ -20,14 +20,14 @@ namespace School.Domain
         public async Task<IEnumerable<ILevelDto>> GetAllLevels()
         {
             var levels = await UnitOfWork.Repo.GetAll();
-            var levelDtos = Mapper.Map<IEnumerable<Level>, IEnumerable<ILevelDto>>(levels);
+            var levelDtos = Mapper.Map<IEnumerable<Level>, IEnumerable<LevelDto>>(levels);
             return levelDtos;
         }
 
         public async Task<ILevelDto> GetLevel(int id)
         {
             var level = await UnitOfWork.Repo.FirstOrDefault(x => x.Id == id);
-            var levelDto = Mapper.Map<Level, ILevelDto>(level);
+            var levelDto = Mapper.Map<Level, LevelDto>(level);
             return levelDto;
         }
 
@@ -50,43 +50,5 @@ namespace School.Domain
             UnitOfWork.Repo.Remove(x => x.Id == id);
             return await UnitOfWork.SaveChanges() > 0;
         }
-
-        //private Level GetLevel(LevelParameter levelParameter)
-        //{
-        //    return new Level
-        //    {
-        //        Name = levelParameter.LevelName
-        //    };
-        //}
-
-        //private Level GetLevel(ILevelDto levelParameter)
-        //{
-        //    return new Level
-        //    {
-        //        Id = levelParameter.LevelId,
-        //        Name = levelParameter.LevelName
-        //    };
-        //}
-
-        //private ILevelDto GetLevelDto(Level level)
-        //{
-        //    return new LevelDto
-        //    {
-        //        LevelId = level.Id,
-        //        LevelName = level.Name
-        //    };
-        //}
-
-        //private IEnumerable<ILevelDto> GetLevelDtos(IEnumerable<Level> levels)
-        //{
-        //    IEnumerable<ILevelDto> levelDtos = new List<ILevelDto>();
-        //    foreach (var level in levels)
-        //    {
-        //        ILevelDto levelDto = GetLevelDto(level);
-        //        levelDtos.Add(levelDto);
-        //    }
-
-        //    return levelDtos;
-        //}
     }
 }

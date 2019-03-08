@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using School.DataLayer.Entities;
+﻿using School.DataLayer.Entities;
 using School.Domain.Dto;
 using School.Domain.Dto.Parameters;
-using School.Domain.Interfaces.DtoInterfaces;
 
 namespace School.Domain.Mapping
 {
@@ -17,7 +11,6 @@ namespace School.Domain.Mapping
             CreateMap<ClassRoomDto, ClassRoom>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ClassRoomId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ClassRoomName))
-                .ForMember(dest => dest.Level.Name, opt => opt.MapFrom(src => src.LevelName))
                 .ReverseMap();
 
             CreateMap<ClassRoomParameter, ClassRoom>()

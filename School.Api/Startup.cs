@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using School.DataLayer.Context;
 using School.DataLayer.Entities;
 using School.Domain;
@@ -30,7 +24,7 @@ namespace School.Api
             _configuration = configuration;
         }
 
-        
+
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -48,7 +42,9 @@ namespace School.Api
             services.AddTransient<IUnitOfWork<Level>, UnitOfWork<Level>>();
             services.AddTransient<IRepository<Level>, Repository<Level>>();
 
-
+            services.AddTransient<IClassRoomBusiness, ClassRoomBusiness>();
+            services.AddTransient<IUnitOfWork<ClassRoom>, UnitOfWork<ClassRoom>>();
+            services.AddTransient<IRepository<ClassRoom>, Repository<ClassRoom>>();
 
 
 
@@ -62,14 +58,14 @@ namespace School.Api
 
         }
 
-        
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseMvc();
 
             app.UseSwagger();

@@ -12,7 +12,7 @@ namespace School.Domain.Mapping
             TeacherMapping();
             SubjectMapping();
             SubjectLevelMapping();
-
+            ClassRoomMapping();
         }
 
 
