@@ -1,0 +1,42 @@
+﻿@model ILevelDto
+
+@{
+    ViewData["Title"] = "AddOrUpdate";
+}
+
+<h1>
+    @if (Model.LevelId > 0)
+    {
+        <span>Update</span>
+    }
+    else
+    {
+        <span>Create</span>
+    }
+</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.LevelId)
+            <div class="form-group">
+                <label asp-for="LevelName" class="control-label"></label>
+                <input asp-for="LevelName" class="form-control" />
+                <span asp-validation-for="LevelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllLevels">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

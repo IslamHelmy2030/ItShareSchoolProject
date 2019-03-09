@@ -1,0 +1,35 @@
+﻿@model IEnumerable<IGenderDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Create New</a>
+</p>
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GenderType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenderType)
+            </td>
+            <td>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.GenderId">Edit</a>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.GenderId">Details</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.GenderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ILevelDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a class="btn btn-success" asp-action="AddOrUpdate">Create New</a>
+</p>
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LevelName)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelName)
+            </td>
+            <td>
+                <a class="btn btn-info" asp-action="AddOrUpdate" asp-route-id="@item.LevelId">Update</a>
+                <a class="btn btn-danger" asp-action="Remove" asp-route-id="@item.LevelId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
