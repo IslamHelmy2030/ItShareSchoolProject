@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IClassRoomDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create</a>
+</p>
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassRoomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LevelName)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassRoomName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelName)
+            </td>
+            <td>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.ClassRoomId">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ClassRoomId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

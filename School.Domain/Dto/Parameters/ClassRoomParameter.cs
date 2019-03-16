@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace School.Domain.Dto.Parameters
 {
     public class ClassRoomParameter
     {
-        [Required(AllowEmptyStrings = false,ErrorMessage = "Class Room Name Is Required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Class Room Name Is Required"), Display(Name = "Class Name")]
         public string ClassRoomName { get; set; }
+
+        [Display(Name = "Level")]
+        [Required(ErrorMessage = "Level Is Required")]
         public int LevelId { get; set; }
     }
 }

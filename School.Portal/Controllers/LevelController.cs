@@ -39,7 +39,10 @@ namespace School.Portal.Controllers
             if (levelDto.LevelId > 0)
                 await _levelBusiness.UpdateLevel(levelDto);
             else
-                await _levelBusiness.AddLevel(new LevelParameter {LevelName = levelDto.LevelName});
+            {
+                var levelParameter = new LevelParameter {LevelName = levelDto.LevelName};
+                await _levelBusiness.AddLevel(levelParameter);
+            }
             return RedirectToAction("GetAllLevels");
         }
 
