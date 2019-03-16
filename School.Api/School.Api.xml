@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>School.Api</name>
+    </assembly>
+    <members>
+        <member name="M:School.Api.Controllers.ClassRoomController.#ctor(School.Domain.Interfaces.BusinessInterfaces.IClassRoomBusiness)">
+            <summary>
+            
+            </summary>
+            <param name="classRoomBusiness"></param>
+        </member>
+    </members>
+</doc>

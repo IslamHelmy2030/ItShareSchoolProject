@@ -13,7 +13,10 @@ namespace School.Api.Controllers
     public class ClassRoomController : ControllerBase
     {
         private readonly IClassRoomBusiness _classRoomBusiness;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="classRoomBusiness"></param>
         public ClassRoomController(IClassRoomBusiness classRoomBusiness)
         {
             _classRoomBusiness = classRoomBusiness;

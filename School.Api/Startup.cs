@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using School.DataLayer.Context;
 using School.DataLayer.Entities;
 using School.Domain;
@@ -12,6 +15,11 @@ using School.Domain.Interfaces.BusinessInterfaces;
 using School.Repositories.Repository;
 using School.Repositories.UnitOfWork;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace School.Api
 {
@@ -28,7 +36,40 @@ namespace School.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SchoolContext>(cfg => { cfg.UseSqlServer(_configuration.GetConnectionString("SchoolConnection")); });
+            services.AddDbContext<SchoolContext>(cfg =>
+                { cfg.UseSqlServer(
+                    _configuration.GetConnectionString("SchoolConnection")); })
+                .AddIdentity<IdentityUser,IdentityRole>(
+                    option =>
+                {
+                    option.Password.RequireDigit = false;
+                    option.Password.RequiredLength = 6;
+                    option.Password.RequireNonAlphanumeric = false;
+                    option.Password.RequireUppercase = false;
+                    option.Password.RequireLowercase = false;
+                }
+                    )
+                .AddEntityFrameworkStores<SchoolContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = "www.Yahoo.com",
+                    ValidateAudience = true,
+                    ValidAudience = "www.google.com",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SaraAmroMohammedMoamen")),
+                };
+            });
 
             services.AddAutoMapper();
 
@@ -59,10 +100,34 @@ namespace School.Api
             services.AddTransient<IRepository<Student>, Repository<Student>>();
 
 
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info { Title = "School API V1", Version = "v1" });
+
+                options.DescribeAllEnumsAsStrings();
+                var filePath = Path.Combine(AppContext.BaseDirectory, "School.Api.xml");
+                options.IncludeXmlComments(filePath);
+
+                // Swagger 2.+ support
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+
+                options.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                options.AddSecurityRequirement(security);
+
+            });
+        
 
 
-
-            services.AddSwaggerGen(cfg => cfg.SwaggerDoc("v1", new Info { Title = "School API", Version = "v1" }));
+        //services.AddSwaggerGen(cfg => cfg.SwaggerDoc("v1", new Info { Title = "School API", Version = "v1" }));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -77,9 +142,15 @@ namespace School.Api
             }
 
             app.UseMvc();
+            app.UseAuthentication();
 
             app.UseSwagger();
-            app.UseSwaggerUI(cfg => cfg.SwaggerEndpoint("/swagger/v1/swagger.json", "School API V1"));
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "School API V1");
+                c.DocumentTitle = "School Documentation";
+                c.DocExpansion(DocExpansion.None);
+            });
         }
     }
 }

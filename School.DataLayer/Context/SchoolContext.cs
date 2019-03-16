@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using School.DataLayer.Entities;
 
 namespace School.DataLayer.Context
 {
-    public class SchoolContext : DbContext
+    public class SchoolContext : IdentityDbContext<IdentityUser>
     {
         public SchoolContext(DbContextOptions<SchoolContext> options) : base(options)
         {
