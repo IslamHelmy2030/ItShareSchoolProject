@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using School.Domain.Dto;
 using School.Domain.Dto.Parameters;
@@ -13,11 +11,12 @@ namespace School.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class SubjectController : ControllerBase
     {
         private readonly ISubjectBusiness _subjectBusiness;
 
-        public SubjectController(ISubjectBusiness subjectBusiness )
+        public SubjectController(ISubjectBusiness subjectBusiness)
         {
             _subjectBusiness = subjectBusiness;
 
@@ -27,7 +26,7 @@ namespace School.Api.Controllers
         public async Task<IActionResult> GetAllSubjects()
         {
             var result = await _subjectBusiness.GetAllSubjects();
-            if(result.Any())
+            if (result.Any())
             {
                 return Ok(result);
             }
@@ -49,11 +48,13 @@ namespace School.Api.Controllers
         [HttpPost("AddSubject")]
         public async Task<IActionResult> AddSubject(SubjectParameter parameter)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var isAdded = await _subjectBusiness.AddSubject(parameter);
                 if (isAdded)
+                {
                     return Ok("Added Successfully");
+                }
             }
             return BadRequest(ModelState);
         }
@@ -61,12 +62,13 @@ namespace School.Api.Controllers
         [HttpPut("UpdateSubject")]
         public async Task<IActionResult> UpdateSubject(SubjectDto subjectDto)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var isUpdated = await _subjectBusiness.UpdateSubject(subjectDto);
                 if (isUpdated)
+                {
                     return Ok("Updated Successfully");
-
+                }
             }
             return BadRequest(ModelState);
 
@@ -75,8 +77,12 @@ namespace School.Api.Controllers
         public async Task<IActionResult> DeleteSubject(int id)
         {
             var isDeleted = await _subjectBusiness.DeleteSubject(id);
-            if (isDeleted) return Ok("Deleted Successfully");
-                    return BadRequest();
+            if (isDeleted)
+            {
+                return Ok("Deleted Successfully");
+            }
+
+            return BadRequest();
         }
 
 

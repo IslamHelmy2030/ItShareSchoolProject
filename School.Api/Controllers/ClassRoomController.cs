@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using School.Domain.Dto;
@@ -10,6 +11,7 @@ namespace School.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class ClassRoomController : ControllerBase
     {
         private readonly IClassRoomBusiness _classRoomBusiness;

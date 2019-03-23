@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using School.Domain.Dto;
 using School.Domain.Dto.Parameters;
@@ -10,6 +10,7 @@ namespace School.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class GenderController : ControllerBase
     {
         private readonly IGenderBusiness _genderBusiness;
@@ -63,7 +64,10 @@ namespace School.Api.Controllers
             if (ModelState.IsValid)
             {
                 var isUpdated = await _genderBusiness.UpdateGender(gender);
-                if (isUpdated) return Ok("Updated Successfully");
+                if (isUpdated)
+                {
+                    return Ok("Updated Successfully");
+                }
             }
             return BadRequest(ModelState);
         }
@@ -72,7 +76,11 @@ namespace School.Api.Controllers
         public async Task<IActionResult> DeleteGender(int id)
         {
             var isDeleted = await _genderBusiness.DeleteGender(id);
-            if (isDeleted) return Ok("Deleted Successfully");
+            if (isDeleted)
+            {
+                return Ok("Deleted Successfully");
+            }
+
             return BadRequest();
         }
     }

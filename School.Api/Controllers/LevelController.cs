@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
 using School.Domain.Dto;
 using School.Domain.Dto.Parameters;
 using School.Domain.Interfaces.BusinessInterfaces;
@@ -13,6 +10,7 @@ namespace School.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class LevelController : ControllerBase
     {
 

@@ -37,18 +37,17 @@ namespace School.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SchoolContext>(cfg =>
-                { cfg.UseSqlServer(
-                    _configuration.GetConnectionString("SchoolConnection")); })
-                .AddIdentity<IdentityUser,IdentityRole>(
-                    option =>
+                {
+                    cfg.UseSqlServer(_configuration.GetConnectionString("SchoolConnection"));
+                    //.UseLazyLoadingProxies();
+                }).AddIdentity<IdentityUser, IdentityRole>(option =>
                 {
                     option.Password.RequireDigit = false;
                     option.Password.RequiredLength = 6;
                     option.Password.RequireNonAlphanumeric = false;
                     option.Password.RequireUppercase = false;
                     option.Password.RequireLowercase = false;
-                }
-                    )
+                })
                 .AddEntityFrameworkStores<SchoolContext>()
                 .AddDefaultTokenProviders();
 
@@ -70,11 +69,11 @@ namespace School.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SaraAmroMohammedMoamen")),
                 };
             });
-
+            
             services.AddAutoMapper();
 
             services.AddScoped<DbContext, SchoolContext>();
-
+            services.AddTransient<IAccountBusiness, AccountBusiness>();
             services.AddTransient<IGenderBusiness, GenderBusiness>();
             services.AddTransient<IUnitOfWork<Gender>, UnitOfWork<Gender>>();
             services.AddTransient<IRepository<Gender>, Repository<Gender>>();
@@ -98,6 +97,10 @@ namespace School.Api
             services.AddTransient<IStudentBusiness, StudentBusiness>();
             services.AddTransient<IUnitOfWork<Student>, UnitOfWork<Student>>();
             services.AddTransient<IRepository<Student>, Repository<Student>>();
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors();
 
 
             services.AddSwaggerGen(options =>
@@ -124,33 +127,36 @@ namespace School.Api
                 options.AddSecurityRequirement(security);
 
             });
-        
-
-
-        //services.AddSwaggerGen(cfg => cfg.SwaggerDoc("v1", new Info { Title = "School API", Version = "v1" }));
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }
 
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbContext dbContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
+            app.UseCors(
+                options => options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()
+            );
 
-            app.UseMvc();
             app.UseAuthentication();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "School API V1");
-                c.DocumentTitle = "School Documentation";
+                c.DocumentTitle = "ERP Documentation";
                 c.DocExpansion(DocExpansion.None);
             });
+            app.UseMvc();
+
+            dbContext.Database.EnsureCreated();
         }
     }
 }
